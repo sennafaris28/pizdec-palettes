@@ -1,0 +1,22 @@
+{
+  "name": "pizdec-palettes",
+  "version": "1.0.0",
+  "description": "Colour palettes for the Pizdec Dark theme: built-in presets, your own named palettes, and a colour picker with live preview.",
+  "main": "main.js",
+  "scripts": {
+    "dev": "node esbuild.config.mjs",
+    "build": "tsc -noEmit -skipLibCheck && node esbuild.config.mjs production",
+    "test": "node test/run.mjs"
+  },
+  "keywords": ["obsidian", "theme", "palette", "colors"],
+  "author": "pizdec.tv",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^20.11.0",
+    "builtin-modules": "^3.3.0",
+    "esbuild": "0.20.2",
+    "obsidian": "latest",
+    "tslib": "2.6.2",
+    "typescript": "5.4.5"
+  }
+}

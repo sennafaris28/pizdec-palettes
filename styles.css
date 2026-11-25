@@ -1,0 +1,156 @@
+/* ---- Settings: colour swatch buttons ---- */
+.pzp-settings .pzp-swatch {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 30px;
+  padding: 0 4px 0 10px;
+  border-radius: 8px;
+  background: var(--background-modifier-form-field);
+  box-shadow: none;
+  cursor: pointer;
+}
+.pzp-settings .pzp-swatch:hover,
+.pzp-settings .pzp-swatch.is-picking {
+  background: var(--background-modifier-hover);
+}
+.pzp-settings .pzp-swatch.is-picking {
+  box-shadow: 0 0 0 2px var(--interactive-accent);
+}
+.pzp-settings .pzp-swatch.is-locked {
+  cursor: default;
+  opacity: 0.85;
+}
+.pzp-swatch-hex {
+  font-family: var(--font-monospace);
+  font-size: var(--font-ui-smaller);
+  color: var(--text-muted);
+  text-transform: lowercase;
+}
+.pzp-swatch-chip {
+  width: 22px;
+  height: 22px;
+  border-radius: 6px;
+  background: var(--pzp-color);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.12);
+}
+.pzp-note {
+  margin: 8px 0 16px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  background: var(--background-secondary-alt);
+  color: var(--text-muted);
+  font-size: var(--font-ui-small);
+}
+.pzp-note-icon {
+  display: inline-flex;
+  vertical-align: -3px;
+  margin-right: 6px;
+}
+.pzp-note-icon svg {
+  width: 15px;
+  height: 15px;
+}
+
+/* ---- The picker popover ---- */
+.pzp-picker {
+  position: fixed;
+  z-index: var(--layer-popover, 40);
+  width: 260px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  border-radius: 12px;
+  background: var(--background-secondary);
+  box-shadow: 0 0 0 1px var(--background-modifier-border-hover, rgba(255, 255, 255, 0.08)),
+    0 16px 44px rgba(0, 0, 0, 0.55);
+  user-select: none;
+}
+.pzp-title {
+  font-size: var(--font-ui-small);
+  font-weight: 600;
+  color: var(--text-muted);
+}
+.pzp-area {
+  position: relative;
+  height: 150px;
+  border-radius: 8px;
+  cursor: crosshair;
+  touch-action: none;
+}
+.pzp-area-white,
+.pzp-area-black {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+}
+.pzp-area-white {
+  background: linear-gradient(to right, #fff, rgba(255, 255, 255, 0));
+}
+.pzp-area-black {
+  background: linear-gradient(to top, #000, rgba(0, 0, 0, 0));
+}
+.pzp-hue {
+  position: relative;
+  height: 12px;
+  border-radius: 99px;
+  background: linear-gradient(to right, #f00 0%, #ff0 16.66%, #0f0 33.33%, #0ff 50%, #00f 66.66%, #f0f 83.33%, #f00 100%);
+  cursor: pointer;
+  touch-action: none;
+}
+.pzp-knob {
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 2px solid #fff;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.35), 0 2px 6px rgba(0, 0, 0, 0.5);
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+.pzp-hue .pzp-knob {
+  top: 50%;
+}
+.pzp-area.is-dragging,
+.pzp-hue.is-dragging {
+  cursor: grabbing;
+}
+.pzp-row {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+.pzp-compare {
+  display: flex;
+  flex-shrink: 0;
+  height: 30px;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+}
+.pzp-old,
+.pzp-new {
+  width: 26px;
+}
+.pzp-old {
+  cursor: pointer;
+}
+.pzp-picker .pzp-hex {
+  flex: 1;
+  min-width: 0;
+  height: 30px;
+  font-family: var(--font-monospace);
+  font-size: var(--font-ui-small);
+  text-transform: lowercase;
+}
+.pzp-picker .pzp-hex.is-invalid {
+  box-shadow: 0 0 0 2px var(--text-error);
+}
+.pzp-buttons {
+  display: flex;
+  gap: 8px;
+}
+.pzp-buttons button {
+  flex: 1;
+}
