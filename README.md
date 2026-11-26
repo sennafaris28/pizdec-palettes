@@ -9,7 +9,7 @@ Colour palettes for the [Pizdec Dark](https://github.com/sennafaris28/pizdec-dar
   - The whole app recolours live while you pick.
   - **Save** keeps the colour. **Cancel**, **Esc** or clicking away puts the previous one back. Click the left half of the preview chip to go back to where you started.
   - Works when Obsidian opens Settings in its own window.
-- **Neon glow** on headings, per palette.
+- **Neon glow** on headings, per palette, in a colour you pick (it follows Mid accent until you set it).
 - Command **Switch to the next palette**, so you can bind a hotkey.
 
 Open **Settings → Pizdec Palettes**. The main accent (links, tags, buttons, selection) stays Obsidian's own

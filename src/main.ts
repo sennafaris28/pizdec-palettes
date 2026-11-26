@@ -1,5 +1,5 @@
 import { App, Notice, Plugin, PluginSettingTab, Setting, setIcon } from "obsidian";
-import { BUILTINS, COLORS, Palette, colorOf, paletteCss, uniqueName } from "./palettes";
+import { BUILTINS, COLORS, FOLLOWS, Palette, colorOf, paletteCss, uniqueName } from "./palettes";
 import { cancelOpenPicker, openPicker } from "./picker";
 
 interface Data {
@@ -217,14 +217,15 @@ class PalettesTab extends PluginSettingTab {
         group = c.group;
         new Setting(el).setName(group).setHeading();
       }
-      const following = c.key === "sidebar" && !active.colors.sidebar;
+      const source = FOLLOWS[c.key] ? COLORS.find((x) => x.key === FOLLOWS[c.key]) : undefined;
+      const following = !!source && !active.colors[c.key];
       const s = new Setting(el).setName(c.label);
-      const desc = following ? `${c.desc ?? ""} Follows Editor background.`.trim() : c.desc;
+      const desc = following ? `${c.desc ?? ""} Follows ${source!.label}.`.trim() : c.desc;
       if (desc) s.setDesc(desc);
-      if (c.key === "sidebar" && !following && !active.builtin) {
+      if (source && !following && !active.builtin) {
         s.addExtraButton((b) =>
-          b.setIcon("link").setTooltip("Follow Editor background again").onClick(async () => {
-            delete active.colors.sidebar;
+          b.setIcon("link").setTooltip(`Follow ${source.label} again`).onClick(async () => {
+            delete active.colors[c.key];
             await plugin.save();
             this.display();
           }),
@@ -261,7 +262,7 @@ class PalettesTab extends PluginSettingTab {
             active.colors[c.key] = hex;
             plugin.setPreview(c.key, null);
             await plugin.save();
-            if (c.key === "bg-0" || c.key === "sidebar") this.display(); // Sidebars may follow
+            if (Object.values(FOLLOWS).includes(c.key) || FOLLOWS[c.key]) this.display(); // a follower may change
             else paint(hex);
           },
           onCancel: () => {

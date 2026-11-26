@@ -24,13 +24,17 @@ export const COLORS: ColorDef[] = [
   { key: "accent-mid", label: "Mid accent", desc: "Inline code, checkboxes, scrollbars.", group: "Accents" },
   { key: "accent-2", label: "Pop accent", desc: "Caret, ==highlights==, NoteBoard today marker.", group: "Accents" },
   { key: "unresolved", label: "Unresolved links", desc: "Links to notes that don't exist yet.", group: "Accents" },
+  { key: "glow", label: "Heading glow", desc: "Colour of the neon glow, when the palette has it on.", group: "Accents" },
   { key: "code-function", label: "Functions", group: "Code highlighting" },
   { key: "code-keyword", label: "Keywords", group: "Code highlighting" },
   { key: "code-string", label: "Strings", group: "Code highlighting" },
   { key: "code-value", label: "Numbers & values", group: "Code highlighting" },
 ];
 
-/** Colour key → hex. "sidebar" may be missing: then it follows the editor background. */
+/** Colours that follow another one until you set them (colour key → the one it follows). */
+export const FOLLOWS: Record<string, string> = { sidebar: "bg-0", glow: "accent-mid" };
+
+/** Colour key → hex. Keys in FOLLOWS may be missing: then they follow their source. */
 export type Colors = Record<string, string>;
 
 export interface Palette {
@@ -58,6 +62,7 @@ export const BUILTINS: Palette[] = [
     colors: { ...PIZDEC, "bg-0": "#0d1b2a", "accent-2": "#ff00ff", "code-keyword": "#ffcc00" },
   },
   {
+    // Neon: violet-black night, cyan + hot pink, yellow strings, cyan glow.
     id: "cyberpunk", name: "Cyberpunk", glow: true, builtin: true,
     colors: {
       "bg-0": "#0b0b14", sidebar: "#08080f", "bg-1": "#11111e", "bg-2": "#161628", "bg-3": "#1f1f38",
@@ -71,7 +76,7 @@ export const BUILTINS: Palette[] = [
 
 /** The colour actually used for `key` (Sidebars falls back to Editor background). */
 export function colorOf(p: Palette, key: string): string {
-  return p.colors[key] ?? (key === "sidebar" ? colorOf(p, "bg-0") : PIZDEC[key] ?? "#000000");
+  return p.colors[key] ?? (FOLLOWS[key] ? colorOf(p, FOLLOWS[key]) : PIZDEC[key] ?? "#000000");
 }
 
 /**

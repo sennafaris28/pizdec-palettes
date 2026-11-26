@@ -13,6 +13,8 @@ assert.equal(P.normalizeHex("ABC"), "#aabbcc");
 assert.equal(P.normalizeHex("#12345g"), null);
 const navy = P.BUILTINS.find((p) => p.id === "navy");
 assert.equal(P.colorOf(navy, "sidebar"), "#0d1b2a", "sidebar follows editor background");
+assert.equal(P.colorOf(navy, "glow"), P.colorOf(navy, "accent-mid"), "glow follows mid accent");
+assert.equal(P.colorOf(P.BUILTINS.find((p) => p.id === "cyberpunk"), "glow"), "#05d9e8");
 assert.match(P.paletteCss(navy), /--pz-sidebar: #0d1b2a;/);
 assert.equal(P.paletteCss(navy).match(/--pz-/g).length, P.COLORS.length);
 for (const p of P.BUILTINS) for (const c of P.COLORS) assert.ok(P.normalizeHex(P.colorOf(p, c.key)), `${p.id} ${c.key}`);

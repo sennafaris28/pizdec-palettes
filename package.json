@@ -1,6 +1,6 @@
 {
   "name": "pizdec-palettes",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Colour palettes for the Pizdec Dark theme: built-in presets, your own named palettes, and a colour picker with live preview.",
   "main": "main.js",
   "scripts": {
